@@ -1,0 +1,40 @@
+.product-list {
+    font-size: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #b5b1b1;
+    margin: 20px 0;
+  }
+  
+  .product-list h2 {
+    color: #333;
+  }
+  
+  .product-list input[type="text"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 50%;
+    box-sizing: border-box;
+    border-radius: 8px;
+  }
+  
+  .product-list .product-item {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .product-list .product-item li {
+    margin-bottom: 5px;
+  }
+  
+  .product-list .product-item li a {
+    color: #555;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .product-list .product-item li a:hover {
+    color: #a2d2e6;
+  }
+  

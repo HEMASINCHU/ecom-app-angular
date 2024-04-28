@@ -1,0 +1,8 @@
+<div class="product-details">
+  <h2>Product Details</h2>
+  <div *ngIf="(product$ | async) as product">
+    <h3>{{ product.title }}</h3>
+    <p>{{ product.body }}</p>
+  </div>
+</div>
+
