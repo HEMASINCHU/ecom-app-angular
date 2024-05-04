@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { getProducts } from '../store/product.action';
-import { AppState } from '../store/product.reducer';
-import { selectProducts } from '../store/product.selector';
-
+import { selectProducts } from './store/product.selector';
+import * as productListActions from './store/product.action';
+import { AppState } from '../store/app.reducer';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -22,11 +21,11 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProducts();
-    this.store.select(selectProducts).subscribe((res) => console.log(res));
+    this.products$ = this.store.select(selectProducts);
   }
 
   loadProducts(): void {
     // this.products$ = this.productService.getProducts();
-    this.store.dispatch(getProducts());
+    this.store.dispatch(new productListActions.GetProducts());
   }
 }

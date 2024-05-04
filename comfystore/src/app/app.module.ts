@@ -8,12 +8,15 @@ import { HomeComponent } from './home/home.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductFilterPipe } from './filter.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductService } from './product.service';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
-import { productReducer } from './store/product.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import * as fromApp from './store/app.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductListEffects } from './product-list/store/product.effect';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,8 +31,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     HttpClientModule,
     FormsModule,
     RouterModule,
+    ReactiveFormsModule,
     AppRoutingModule,
-    StoreModule.forRoot({ productDetail: productReducer }),
+    StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot(ProductListEffects),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: !isDevMode(),

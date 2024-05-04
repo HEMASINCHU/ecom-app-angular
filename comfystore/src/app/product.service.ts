@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class ProductService {
   private apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+  subscribe: any;
 
   constructor(private http: HttpClient) {}
 

@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/app.reducer';
+import * as productListActions from '../product-list/store/product.action';
+import { selectProductDetails } from '../product-list/store/product.selector';
+import { Product } from '../product-list/store/product.reducer';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -10,23 +15,28 @@ import { Observable } from 'rxjs';
 export class ProductDetailsComponent implements OnInit {
   productId!: number;
   product$!: Observable<any>;
+  product!: Product | null;
 
-  constructor(
-    private route: ActivatedRoute,
-    private productService: ProductService
-  ) {}
+  constructor(private route: ActivatedRoute, private store: Store<AppState>) {}
 
   ngOnInit(): void {
     if (this.route) {
-      const id = this.route.snapshot.paramMap.get('id');
+      const id: string | null = this.route.snapshot.paramMap.get('id');
       if (id) {
-        this.productId = +id;
-        this.product$ = this.productService.getProductById(this.productId);
-      } else {
-        console.error('Product ID is missing.');
+        this.store.dispatch(new productListActions.GetProductDetails(id));
       }
-    } else {
-      console.error('ActivatedRoute is not available.');
+      this.product$ = this.store.select(selectProductDetails);
+      // dispatch action get single product
+
+      // if (id) {
+      //   this.productId = +id;
+      //   this.product$ = this.productService.getProductById(this.productId);
+      // } else {
+      //   console.error('Product ID is missing.');
+      // }
     }
+    //  else {
+    //   console.error('ActivatedRoute is not available.');
+    // }
   }
 }
