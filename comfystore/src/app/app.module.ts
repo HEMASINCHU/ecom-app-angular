@@ -16,6 +16,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import * as fromApp from './store/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductListEffects } from './product-list/store/product.effect';
+import { AuthEffects } from './forms/login/store/auth.effect';
+import { LoginComponent } from './forms/login/login.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { ProductListEffects } from './product-list/store/product.effect';
     ProductListComponent,
     ProductFilterPipe,
     HomeComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,7 @@ import { ProductListEffects } from './product-list/store/product.effect';
     ReactiveFormsModule,
     AppRoutingModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot(ProductListEffects),
+    EffectsModule.forRoot(ProductListEffects, AuthEffects),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: !isDevMode(),
@@ -44,7 +48,7 @@ import { ProductListEffects } from './product-list/store/product.effect';
       connectInZone: true,
     }),
   ],
-  providers: [ProductService],
+  providers: [ProductService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

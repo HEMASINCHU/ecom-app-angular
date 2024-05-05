@@ -26,17 +26,6 @@ export class ProductDetailsComponent implements OnInit {
         this.store.dispatch(new productListActions.GetProductDetails(id));
       }
       this.product$ = this.store.select(selectProductDetails);
-      // dispatch action get single product
-
-      // if (id) {
-      //   this.productId = +id;
-      //   this.product$ = this.productService.getProductById(this.productId);
-      // } else {
-      //   console.error('Product ID is missing.');
-      // }
     }
-    //  else {
-    //   console.error('ActivatedRoute is not available.');
-    // }
   }
 }
