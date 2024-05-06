@@ -18,7 +18,7 @@ export class GetProducts implements Action {
 
 export class GetProductsSuccess implements Action {
   readonly type = GET_PRODUCTS_SUCCESS;
-  constructor(public payload: Product[]) {}
+  constructor(public payload: { data: Product[] }) {}
 }
 
 export class GetProductDetails implements Action {

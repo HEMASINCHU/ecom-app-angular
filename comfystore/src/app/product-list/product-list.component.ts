@@ -5,13 +5,14 @@ import { Store } from '@ngrx/store';
 import { selectProducts } from './store/product.selector';
 import * as productListActions from './store/product.action';
 import { AppState } from '../store/app.reducer';
+import { Product } from './store/product.reducer';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  products$!: Observable<any[]>;
+  products$!: Observable<Product[]>;
   searchTerm!: string;
 
   constructor(

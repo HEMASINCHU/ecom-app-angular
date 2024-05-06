@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ProductService } from '../../product.service';
 import * as productListActions from './product.action';
-import {  exhaustMap, map, of, switchMap, tap } from 'rxjs';
+import { exhaustMap, map, of, switchMap, tap } from 'rxjs';
+import { Product } from './product.reducer';
 @Injectable()
 export class ProductListEffects {
   productId!: number;
@@ -15,14 +16,11 @@ export class ProductListEffects {
   //   ));
   constructor(
     private actions$: Actions,
-    private productService: ProductService,
+    private productService: ProductService
   ) {}
   loadProducts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(productListActions.GET_PRODUCTS),
-      tap(() => {
-        console.log('in effects get products');
-      }),
       exhaustMap(() =>
         this.productService
           .getProducts()

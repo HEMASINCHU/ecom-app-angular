@@ -3,7 +3,9 @@
   <input type="text" [(ngModel)]="searchTerm" placeholder="Search by title" />
   <ul class="product-item">
     <li *ngFor="let product of products$ | async">
-      <a [routerLink]="['/products', product.id]">{{ product.title }}</a>
+      <a [routerLink]="['/products', product.id]">{{
+        product.attributes.title
+      }}</a>
     </li>
   </ul>
 </div>
